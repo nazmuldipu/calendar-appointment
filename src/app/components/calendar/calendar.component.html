@@ -1,0 +1,32 @@
+<div class="p-4 max-w-5xl mx-auto">
+  <div class="flex justify-center text-2xl pb-2">{{months[month]}} - {{year}}</div>
+  <div class="grid grid-cols-7 text-center text-xs md:text-base font-semibold">
+    <div class="bg-teal-200">Sun</div>
+    <div class="bg-teal-200">Mon</div>
+    <div class="bg-teal-200">Tue</div>
+    <div class="bg-teal-200">Wed</div>
+    <div class="bg-teal-200">Thu</div>
+    <div class="bg-teal-200">Fri</div>
+    <div class="bg-teal-200">Sat</div>
+  </div>
+  <div class="grid grid-cols-7 border-l border-t border-dotted">
+    <div *ngFor="let day of dayList" class="">
+      <div *ngIf="!day.isEmpty; else elseBlock" class="calendar-day" [ngClass]="{'bg-teal-50' : day.isToday}">
+        <div class="text-center">{{day.day < 10 ? '0':''}}{{day.day}}</div>
+        <div *ngIf="day.appointments && day.appointments.length > 0" class="h-14 overflow-y-auto flex flex-col-reverse">
+          <div class="appointment" *ngFor="let appointment of day.appointments"
+            (click)="handleAppointmentClick(appointment)">
+            <div class="px-1 truncate">
+              {{appointment.time.hour}}:{{appointment.time.minute < 10 ? '0':''}}{{appointment.time.minute}}-{{appointment.firstName}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #elseBlock>
+        <div class="empty-day"></div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<app-calendar-modal [(show)]="showCalenderModal" [appointment]="appointment" (update)="onUpdate($event)">
+</app-calendar-modal>

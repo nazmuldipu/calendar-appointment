@@ -1,0 +1,9 @@
+<nav class="bg-white shadow">
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="relative flex justify-between h-16 items-center">
+      <div class="text-3xl tracking-wider ">Calendar</div>
+      <button class="btn primary-btn" (click)="showModal()">Create Appointment</button>
+    </div>
+  </div>
+</nav>
+<app-calendar-modal [(show)]="showCalenderModal" (create)="onCreate($event)"></app-calendar-modal>

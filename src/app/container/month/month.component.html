@@ -1,0 +1,4 @@
+<div class="relative">
+  <app-navbar (create)="onCreate($event)"></app-navbar>
+  <app-calendar [date]="id" [appointments]="appointments" (update)="onUpdate($event)"></app-calendar>
+</div>
