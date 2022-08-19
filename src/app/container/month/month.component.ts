@@ -31,15 +31,14 @@ export class MonthComponent implements OnInit {
       this.id.split('-')[0];
 
     this.getAppointments();
-    // this.appointments = this.appointmentService
-    //   .getAppointments()
-    //   .filter((appointment) => appointment.yearMonth === this.yearMonth);
   }
 
   getAppointments() {
     this.appointments = this.appointmentService
       .getAppointments()
       ?.filter((appointment) => appointment.yearMonth === this.yearMonth);
+    this.appointments.sort((a, b) => a.hourMinute - b.hourMinute);
+    this.appointments.sort((a, b) => a.date.day - b.date.day);
   }
 
   setThisMonth(): void {

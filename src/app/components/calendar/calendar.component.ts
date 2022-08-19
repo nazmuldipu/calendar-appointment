@@ -112,6 +112,14 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.update.emit(event);
     this.showCalenderModal = false;
   }
+
+  onDropDownChange(event: any) {
+    let index = this.appointments.findIndex((app) => app.id === event.value);
+    if (index > -1) {
+      this.appointment = this.appointments[index];
+      this.showCalenderModal = true;
+    }
+  }
 }
 
 function isLeapYear(year: number): boolean {

@@ -77,6 +77,11 @@ export class AppointmentFormComponent implements OnChanges {
       let yearMonth = this.getYearMonth(formValue.date);
       let hourMinute = this.gethourMinute(time);
       let id = this.getId();
+      if (date.year > 2099 || date.year < 2000) {
+        this.form.patchValue({ date: null });
+        this.errorMessage = 'Please enter a valid year';
+        return;
+      }
       const value = {
         ...this.form.value,
         id,
@@ -85,7 +90,6 @@ export class AppointmentFormComponent implements OnChanges {
         yearMonth,
         hourMinute,
       } as AppointmentModel;
-
       if (this.exists) {
         this.update.emit({ ...value, id: this.appointment.id });
       } else {
@@ -99,7 +103,7 @@ export class AppointmentFormComponent implements OnChanges {
 
   getId(): string {
     let date = new Date();
-    return `${date.getFullYear}${this.getTwoDigitString(
+    return `${date.getFullYear()}${this.getTwoDigitString(
       date.getMonth()
     )}${this.getTwoDigitString(date.getDate())}${this.getTwoDigitString(
       date.getHours()

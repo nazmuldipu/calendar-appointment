@@ -1,5 +1,18 @@
 <div class="p-4 max-w-5xl mx-auto">
-  <div class="flex justify-center text-2xl pb-2">{{months[month]}} - {{year}}</div>
+  <div class="flex justify-between pb-2 items-center">
+    <div class="text-lg font-semibold md:text-2xl ">
+      {{months[month]}} - {{year}}
+    </div>
+    <div>
+      <select id="appoints" name="appoints" (change)="onDropDownChange($event.target)"
+        class="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-400 rounded-md">
+        <option value="" selected>All Appointments</option>
+        <option *ngFor="let appointment of appointments" [value]="appointment.id">
+          {{appointment.date.day}}_{{appointment.time.hour}}:{{appointment.time.minute < 10 ? '0':''}}{{appointment.time.minute}}-{{appointment.firstName}}
+        </option>
+      </select>
+    </div>
+  </div>
   <div class="grid grid-cols-7 text-center text-xs md:text-base font-semibold">
     <div class="bg-teal-200">Sun</div>
     <div class="bg-teal-200">Mon</div>
